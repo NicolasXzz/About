@@ -460,6 +460,29 @@
       overflow-wrap: anywhere;
     }
 
+    .developer-section {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .developer-card {
+      padding: 28px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(16, 21, 36, 0.92), rgba(11, 15, 28, 0.88));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+    }
+
+    .developer-card p {
+      color: var(--muted);
+    }
+
+    .developer-card p:last-child {
+      margin-bottom: 0;
+    }
+
     .compliance-section {
       display: grid;
       grid-template-columns: 0.85fr 1.15fr;
@@ -492,27 +515,83 @@
 
     .site-footer {
       border-top: 1px solid var(--line);
-      background: rgba(6, 8, 18, 0.88);
+      background: #000;
     }
 
     .footer-inner {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 28px 0;
+      padding: 64px 0;
       color: var(--muted);
       font-size: 0.95rem;
+      text-align: center;
     }
 
+    .footer-inner h3 {
+      margin-bottom: 8px;
+      color: var(--text);
+      font-size: 1.25rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .footer-credit {
+      margin-bottom: 24px;
+    }
+
+    .footer-credit strong {
+      color: var(--text);
+    }
+
+    .footer-actions,
     .footer-links {
       display: flex;
       flex-wrap: wrap;
-      justify-content: flex-end;
+      justify-content: center;
       gap: 16px;
+    }
+
+    .footer-actions {
+      margin-bottom: 32px;
+    }
+
+    .footer-action {
+      display: inline-flex;
+      min-height: 40px;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 16px;
+      border-radius: 8px;
+      background: #1f2937;
+      color: var(--text);
+      font-size: 0.88rem;
       font-weight: 700;
+      transition: background 180ms ease, color 180ms ease;
+    }
+
+    .footer-action:hover {
+      background: #374151;
+    }
+
+    .footer-links {
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .footer-links a {
+      color: var(--blue);
+    }
+
+    .footer-divider {
+      color: rgba(255, 255, 255, 0.28);
+    }
+
+    .footer-note {
+      margin: 32px 0 0;
+      color: #4b5563;
+      font-size: 0.65rem;
     }
 
     @media (max-width: 860px) {
@@ -530,7 +609,8 @@
 
       .hero,
       .compliance-section,
-      .contact-section {
+      .contact-section,
+      .developer-section {
         grid-template-columns: 1fr;
       }
 
@@ -555,13 +635,8 @@
         grid-template-columns: 1fr;
       }
 
-      .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-
       .footer-links {
-        justify-content: flex-start;
+        justify-content: center;
       }
     }
 
@@ -625,6 +700,7 @@
       <div class="nav-links">
         <a href="#features">Features</a>
         <a href="#gameplay">Gameplay</a>
+        <a href="#developer">Developer</a>
         <a href="#contact">Contact</a>
         <a href="#compliance">Compliance</a>
       </div>
@@ -646,7 +722,7 @@
         <div class="trust-strip" aria-label="Developer website details">
           <div class="trust-item">
             <span class="trust-label">Official Developer</span>
-            <span class="trust-value">TetraVerse</span>
+            <span class="trust-value">Nicolas Juantly Napitupulu</span>
           </div>
           <div class="trust-item">
             <span class="trust-label">Store Platform</span>
@@ -654,7 +730,7 @@
           </div>
           <div class="trust-item">
             <span class="trust-label">Support</span>
-            <a class="trust-value" href="mailto:tetraversesupport@gmail.com">tetraversesupport@gmail.com</a>
+            <a class="trust-value" href="mailto:nicolasjuantlynapitupulu@gmail.com">nicolasjuantlynapitupulu@gmail.com</a>
           </div>
         </div>
       </div>
@@ -691,6 +767,29 @@
           <h3>Premium Skins</h3>
           <p>Unlock futuristic visual styles, board effects, and cosmetic themes that let players personalize their puzzle runs.</p>
         </article>
+      </div>
+    </section>
+
+    <section class="section developer-section" id="developer" aria-labelledby="developer-title">
+      <div class="section-heading">
+        <p class="eyebrow">About the Developer</p>
+        <h2 id="developer-title">An independent Solana mobile game project.</h2>
+        <p>
+          TetraVerse is created and maintained by Nicolas Juantly Napitupulu as an individual developer project for mobile players and Solana dApp Store review.
+        </p>
+      </div>
+
+      <div class="developer-card">
+        <p>
+          TetraVerse is an independent project created by Nicolas, an Android developer passionate about bringing Web3 and Solana technology to mobile gaming.
+        </p>
+        <p>
+          My goal is to create seamless and fun blockchain-integrated experiences, starting with a neon puzzle game that keeps gameplay simple while making Solana-powered features easy to access.
+        </p>
+        <div class="actions" aria-label="Developer profile links">
+          <a class="button button-primary" href="https://github.com/nicolasjuantlynapitupulu">GitHub Profile</a>
+          <a class="button button-secondary" href="mailto:nicolasjuantlynapitupulu@gmail.com">Contact Developer</a>
+        </div>
       </div>
     </section>
 
@@ -747,7 +846,7 @@
           </span>
           <span>Open</span>
         </a>
-        <a class="compliance-card" href="mailto:tetraversesupport@gmail.com">
+        <a class="compliance-card" href="mailto:nicolasjuantlynapitupulu@gmail.com">
           <span>
             <strong>Support Email</strong>
             Contact the developer for help, purchase questions, and data requests.
@@ -777,15 +876,15 @@
         <ul class="contact-list">
           <li>
             <span class="contact-label">Developer Contact</span>
-            <a class="contact-link" href="mailto:nicolasseekers@gmail.com">nicolasseekers@gmail.com</a>
+            <a class="contact-link" href="mailto:nicolasjuantlynapitupulu@gmail.com">nicolasjuantlynapitupulu@gmail.com</a>
           </li>
           <li>
             <span class="contact-label">Support Email</span>
-            <a class="contact-link" href="mailto:tetraversesupport@gmail.com">tetraversesupport@gmail.com</a>
+            <a class="contact-link" href="mailto:nicolasjuantlynapitupulu@gmail.com">nicolasjuantlynapitupulu@gmail.com</a>
           </li>
           <li>
             <span class="contact-label">Developer</span>
-            <span class="contact-link">TetraVerse</span>
+            <span class="contact-link">Nicolas Juantly Napitupulu</span>
           </li>
           <li>
             <span class="contact-label">Platform</span>
@@ -798,12 +897,18 @@
 
   <footer class="site-footer">
     <div class="footer-inner">
-      <p>&copy; 2026 TetraVerse. All rights reserved.</p>
-      <div class="footer-links" aria-label="Compliance links">
-        <a href="https://tetraverse.vercel.app/privacy">Privacy Policy</a>
-        <a href="https://tetraverse.vercel.app/terms">Terms of Use</a>
-        <a href="mailto:tetraversesupport@gmail.com">Support Email</a>
+      <h3>Developer Info</h3>
+      <p class="footer-credit">Published by <strong>Nicolas Juantly Napitupulu</strong></p>
+      <div class="footer-actions">
+        <a class="footer-action" href="https://github.com/nicolasjuantlynapitupulu">GitHub Profile</a>
+        <a class="footer-action" href="mailto:nicolasjuantlynapitupulu@gmail.com">Contact Developer</a>
       </div>
+      <div class="footer-links" aria-label="Compliance links">
+        <a href="privacy.html">Privacy</a>
+        <span class="footer-divider">|</span>
+        <a href="terms.html">Terms</a>
+      </div>
+      <p class="footer-note">&copy; 2024 TetraVerse Game. An Independent Solana dApp Project.</p>
     </div>
   </footer>
 </body>
