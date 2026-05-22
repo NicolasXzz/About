@@ -1,0 +1,727 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="TetraVerse is a neon futuristic puzzle game with Solana wallet integration and premium collectible skins.">
+  <link rel="icon" type="image/png" href="icon.png">
+  <link rel="apple-touch-icon" href="icon.png">
+  <title>TetraVerse | Neon Puzzle Game</title>
+  <style>
+    :root {
+      --bg: #070912;
+      --panel: #101524;
+      --panel-soft: #151b2c;
+      --text: #f5f8ff;
+      --muted: #aab5ca;
+      --blue: #5b8fb9;
+      --pink: #ff00cc;
+      --line: rgba(255, 255, 255, 0.12);
+      --shadow-blue: rgba(91, 143, 185, 0.28);
+      --shadow-pink: rgba(255, 0, 204, 0.22);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      color: var(--text);
+      background:
+        radial-gradient(circle at 18% 18%, rgba(91, 143, 185, 0.2), transparent 30%),
+        radial-gradient(circle at 82% 12%, rgba(255, 0, 204, 0.16), transparent 28%),
+        linear-gradient(135deg, #060812 0%, #0a1020 48%, #070912 100%);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid var(--line);
+      background: rgba(7, 9, 18, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      padding: 18px 0;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.05rem;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      display: block;
+      object-fit: cover;
+      border-radius: 8px;
+      box-shadow: 0 0 18px var(--shadow-blue), 0 0 24px var(--shadow-pink);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 600;
+    }
+
+    .nav-links a:hover,
+    .footer-links a:hover,
+    .contact-link:hover {
+      color: var(--pink);
+    }
+
+    main {
+      overflow: hidden;
+    }
+
+    .section {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 88px 0;
+    }
+
+    .hero {
+      min-height: calc(100vh - 67px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+      align-items: center;
+      gap: 52px;
+      padding-top: 64px;
+      padding-bottom: 64px;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 18px;
+      color: var(--blue);
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--blue), var(--pink));
+      box-shadow: 0 0 16px var(--shadow-blue);
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
+    }
+
+    h1 {
+      max-width: 760px;
+      margin-bottom: 22px;
+      font-size: clamp(3.1rem, 8vw, 7.3rem);
+      line-height: 0.92;
+      letter-spacing: 0;
+      text-shadow:
+        0 0 18px rgba(91, 143, 185, 0.44),
+        0 0 34px rgba(255, 0, 204, 0.24);
+    }
+
+    .hero-copy {
+      max-width: 640px;
+      margin-bottom: 30px;
+      color: var(--muted);
+      font-size: clamp(1.05rem, 2vw, 1.25rem);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
+    .button {
+      display: inline-flex;
+      min-height: 48px;
+      align-items: center;
+      justify-content: center;
+      padding: 12px 18px;
+      border: 1px solid transparent;
+      border-radius: 8px;
+      font-weight: 800;
+      transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary {
+      color: #070912;
+      background: linear-gradient(135deg, var(--blue), var(--pink));
+      box-shadow: 0 0 30px var(--shadow-pink);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      border-color: rgba(91, 143, 185, 0.5);
+      background: rgba(255, 255, 255, 0.04);
+      box-shadow: inset 0 0 20px rgba(91, 143, 185, 0.08);
+    }
+
+    .game-panel {
+      position: relative;
+      min-height: 440px;
+      border: 1px solid rgba(91, 143, 185, 0.35);
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(145deg, rgba(16, 21, 36, 0.9), rgba(8, 11, 22, 0.92));
+      background-size: 44px 44px, 44px 44px, auto;
+      box-shadow:
+        0 0 38px var(--shadow-blue),
+        inset 0 0 40px rgba(255, 0, 204, 0.08);
+      overflow: hidden;
+    }
+
+    .game-panel::before,
+    .game-panel::after {
+      content: "";
+      position: absolute;
+      inset: auto;
+      filter: blur(2px);
+    }
+
+    .game-panel::before {
+      width: 156px;
+      height: 156px;
+      right: 36px;
+      top: 48px;
+      border: 2px solid var(--pink);
+      box-shadow: 0 0 34px var(--shadow-pink);
+      transform: rotate(18deg);
+    }
+
+    .game-panel::after {
+      width: 116px;
+      height: 116px;
+      left: 44px;
+      bottom: 54px;
+      border: 2px solid var(--blue);
+      box-shadow: 0 0 34px var(--shadow-blue);
+      transform: rotate(-12deg);
+    }
+
+    .tetra-stack {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      display: grid;
+      grid-template-columns: repeat(4, 54px);
+      grid-auto-rows: 54px;
+      gap: 8px;
+      transform: translate(-50%, -50%) rotate(-8deg);
+    }
+
+    .tile {
+      border-radius: 8px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      background: rgba(91, 143, 185, 0.22);
+      box-shadow: 0 0 22px rgba(91, 143, 185, 0.32);
+    }
+
+    .tile.pink {
+      background: rgba(255, 0, 204, 0.24);
+      box-shadow: 0 0 26px rgba(255, 0, 204, 0.34);
+    }
+
+    .tile.empty {
+      border-color: transparent;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .section-heading {
+      max-width: 680px;
+      margin-bottom: 34px;
+    }
+
+    .section-heading h2 {
+      margin-bottom: 12px;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      line-height: 1.05;
+    }
+
+    .section-heading p {
+      color: var(--muted);
+      font-size: 1.05rem;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card,
+    .compliance-card,
+    .contact-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(16, 21, 36, 0.92), rgba(11, 15, 28, 0.88));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+    }
+
+    .feature-card {
+      padding: 24px;
+    }
+
+    .trust-strip {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 14px;
+      margin-top: 30px;
+    }
+
+    .trust-item,
+    .compliance-card {
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .trust-item {
+      padding: 16px;
+    }
+
+    .trust-label {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--muted);
+      font-size: 0.82rem;
+      font-weight: 700;
+    }
+
+    .trust-value {
+      color: var(--text);
+      font-weight: 800;
+      overflow-wrap: anywhere;
+    }
+
+    .feature-icon {
+      width: 46px;
+      height: 46px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 22px;
+      border: 1px solid rgba(91, 143, 185, 0.55);
+      border-radius: 8px;
+      background: rgba(91, 143, 185, 0.12);
+      color: var(--pink);
+      font-size: 1.25rem;
+      font-weight: 900;
+      box-shadow: 0 0 22px rgba(91, 143, 185, 0.2);
+    }
+
+    .feature-card h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .feature-card p {
+      margin-bottom: 0;
+      color: var(--muted);
+    }
+
+    .contact-section {
+      display: grid;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+
+    .contact-card {
+      padding: 28px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .contact-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .contact-label {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+
+    .contact-link {
+      color: var(--blue);
+      font-weight: 800;
+      text-align: right;
+      overflow-wrap: anywhere;
+    }
+
+    .compliance-section {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 28px;
+      align-items: start;
+    }
+
+    .compliance-grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    .compliance-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 20px;
+    }
+
+    .compliance-card strong {
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .compliance-card span {
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .site-footer {
+      border-top: 1px solid var(--line);
+      background: rgba(6, 8, 18, 0.88);
+    }
+
+    .footer-inner {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 28px 0;
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      gap: 16px;
+      font-weight: 700;
+    }
+
+    @media (max-width: 860px) {
+      .nav {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+      }
+
+      .nav-links {
+        width: 100%;
+        justify-content: space-between;
+        gap: 10px;
+      }
+
+      .hero,
+      .compliance-section,
+      .contact-section {
+        grid-template-columns: 1fr;
+      }
+
+      .hero {
+        min-height: auto;
+        gap: 36px;
+      }
+
+      .game-panel {
+        min-height: 340px;
+      }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .trust-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .footer-links {
+        justify-content: flex-start;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .section {
+        width: min(100% - 24px, 1120px);
+        padding: 64px 0;
+      }
+
+      .nav {
+        width: min(100% - 24px, 1120px);
+      }
+
+      .nav-links {
+        flex-wrap: wrap;
+        justify-content: flex-start;
+      }
+
+      .actions,
+      .button {
+        width: 100%;
+      }
+
+      .game-panel {
+        min-height: 300px;
+      }
+
+      .tetra-stack {
+        grid-template-columns: repeat(4, 42px);
+        grid-auto-rows: 42px;
+        gap: 7px;
+      }
+
+      .contact-list li {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .compliance-card {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .contact-link {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav" aria-label="Main navigation">
+      <a class="brand" href="#top" aria-label="TetraVerse home">
+        <img class="brand-mark" src="icon.png" alt="" width="30" height="30">
+        <span>TetraVerse</span>
+      </a>
+      <div class="nav-links">
+        <a href="#features">Features</a>
+        <a href="#contact">Contact</a>
+        <a href="#compliance">Compliance</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="top">
+    <section class="section hero" aria-labelledby="hero-title">
+      <div>
+        <p class="eyebrow">Neon Puzzle Game</p>
+        <h1 id="hero-title">TetraVerse</h1>
+        <p class="hero-copy">
+          A futuristic block puzzle experience where sharp strategy, glowing visuals, and Solana-powered premium skins collide.
+        </p>
+        <div class="actions" aria-label="Primary links">
+          <a class="button button-primary" href="#features">Explore Features</a>
+          <a class="button button-secondary" href="#contact">Contact Developer</a>
+        </div>
+        <div class="trust-strip" aria-label="Developer website details">
+          <div class="trust-item">
+            <span class="trust-label">Official Developer</span>
+            <span class="trust-value">TetraVerse</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-label">Store Platform</span>
+            <span class="trust-value">Solana Dapp Store</span>
+          </div>
+          <div class="trust-item">
+            <span class="trust-label">Support</span>
+            <a class="trust-value" href="mailto:tetraversesupport@gmail.com">tetraversesupport@gmail.com</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="game-panel" aria-label="Abstract neon puzzle board preview">
+        <div class="tetra-stack" aria-hidden="true">
+          <span class="tile empty"></span>
+          <span class="tile pink"></span>
+          <span class="tile pink"></span>
+          <span class="tile empty"></span>
+          <span class="tile"></span>
+          <span class="tile pink"></span>
+          <span class="tile"></span>
+          <span class="tile empty"></span>
+          <span class="tile"></span>
+          <span class="tile"></span>
+          <span class="tile pink"></span>
+          <span class="tile pink"></span>
+          <span class="tile empty"></span>
+          <span class="tile"></span>
+          <span class="tile"></span>
+          <span class="tile pink"></span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="features" aria-labelledby="features-title">
+      <div class="section-heading">
+        <p class="eyebrow">Core Features</p>
+        <h2 id="features-title">Built for quick plays, deep strategy, and Web3 collectibles.</h2>
+        <p>
+          TetraVerse combines arcade puzzle flow with optional Solana wallet features for players who want to unlock and collect premium cosmetics.
+        </p>
+      </div>
+
+      <div class="feature-grid">
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">P</div>
+          <h3>Puzzle Game</h3>
+          <p>Place, rotate, and clear neon blocks in satisfying rounds designed for mobile-first strategy and replayability.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">S</div>
+          <h3>Solana Integrated</h3>
+          <p>Connect a Solana wallet for supported in-game purchases and a smooth blockchain-enabled player experience.</p>
+        </article>
+
+        <article class="feature-card">
+          <div class="feature-icon" aria-hidden="true">+</div>
+          <h3>Premium Skins</h3>
+          <p>Unlock futuristic visual styles, board effects, and cosmetic themes that let players personalize their puzzle runs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section compliance-section" id="compliance" aria-labelledby="compliance-title">
+      <div class="section-heading">
+        <p class="eyebrow">Compliance</p>
+        <h2 id="compliance-title">Official app policies and support links.</h2>
+        <p>
+          This is the official developer website for TetraVerse, provided for Solana dApp Store review, player support, privacy disclosure, and end-user terms.
+        </p>
+      </div>
+
+      <div class="compliance-grid">
+        <a class="compliance-card" href="https://tetraverse.vercel.app/privacy">
+          <span>
+            <strong>Privacy Policy</strong>
+            Explains wallet connection, Firebase leaderboard data, and data deletion requests.
+          </span>
+          <span>Open</span>
+        </a>
+        <a class="compliance-card" href="https://tetraverse.vercel.app/terms">
+          <span>
+            <strong>Terms of Use</strong>
+            Covers Solana transactions, premium skins, fair play, and network limitations.
+          </span>
+          <span>Open</span>
+        </a>
+        <a class="compliance-card" href="mailto:tetraversesupport@gmail.com">
+          <span>
+            <strong>Support Email</strong>
+            Contact the developer for help, purchase questions, and data requests.
+          </span>
+          <span>Email</span>
+        </a>
+      </div>
+    </section>
+
+    <section class="section contact-section" id="contact" aria-labelledby="contact-title">
+      <div class="section-heading">
+        <p class="eyebrow">Contact</p>
+        <h2 id="contact-title">Developer contact for players and store review.</h2>
+        <p>
+          For questions about TetraVerse, Solana wallet integration, purchases, data deletion, or support requests, contact the developer directly.
+        </p>
+      </div>
+
+      <div class="contact-card">
+        <ul class="contact-list">
+          <li>
+            <span class="contact-label">Developer Contact</span>
+            <a class="contact-link" href="mailto:nicolasseekers@gmail.com">nicolasseekers@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-label">Support Email</span>
+            <a class="contact-link" href="mailto:tetraversesupport@gmail.com">tetraversesupport@gmail.com</a>
+          </li>
+          <li>
+            <span class="contact-label">Developer</span>
+            <span class="contact-link">TetraVerse</span>
+          </li>
+          <li>
+            <span class="contact-label">Platform</span>
+            <span class="contact-link">Solana Dapp Store</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>&copy; 2026 TetraVerse. All rights reserved.</p>
+      <div class="footer-links" aria-label="Compliance links">
+        <a href="https://tetraverse.vercel.app/privacy">Privacy Policy</a>
+        <a href="https://tetraverse.vercel.app/terms">Terms of Use</a>
+        <a href="mailto:tetraversesupport@gmail.com">Support Email</a>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/privacy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms",
+      "destination": "/terms.html"
+    },
+    {
+      "source": "/privacy-policy",
+      "destination": "/privacy.html"
+    },
+    {
+      "source": "/terms-of-use",
+      "destination": "/terms.html"
+    }
+  ]
+}
