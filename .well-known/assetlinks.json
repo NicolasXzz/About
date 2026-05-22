@@ -1,0 +1,8 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.tetraverse.app",
+    "sha256_cert_fingerprints": ["6A:05:40:9D:69:B3:01:46:16:D4:C9:28:C8:D2:7C:1E:C4:42:35:E1:1F:B1:97:54:3B:58:63:F1:C9:A0:6C:54"]
+  }
+}]

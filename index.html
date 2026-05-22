@@ -242,6 +242,32 @@
       transform: rotate(-12deg);
     }
 
+    .media-frame {
+      min-height: 0;
+      padding: 14px;
+      display: grid;
+      place-items: center;
+      background:
+        linear-gradient(145deg, rgba(16, 21, 36, 0.92), rgba(8, 11, 22, 0.96)),
+        linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+      background-size: auto, 44px 44px, 44px 44px;
+    }
+
+    .media-frame::before,
+    .media-frame::after {
+      display: none;
+    }
+
+    .hero-screenshot {
+      width: min(100%, 390px);
+      max-height: 640px;
+      display: block;
+      border-radius: 8px;
+      object-fit: contain;
+      box-shadow: 0 0 34px rgba(91, 143, 185, 0.24), 0 0 48px rgba(255, 0, 204, 0.14);
+    }
+
     .tetra-stack {
       position: absolute;
       left: 50%;
@@ -361,6 +387,35 @@
     .feature-card p {
       margin-bottom: 0;
       color: var(--muted);
+    }
+
+    .screenshot-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .screenshot-card {
+      margin: 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: linear-gradient(145deg, rgba(16, 21, 36, 0.92), rgba(11, 15, 28, 0.9));
+      box-shadow: 0 24px 70px rgba(0, 0, 0, 0.26);
+      overflow: hidden;
+    }
+
+    .screenshot-card img {
+      width: 100%;
+      aspect-ratio: 9 / 16;
+      display: block;
+      object-fit: cover;
+      background: #0b0f1c;
+    }
+
+    .screenshot-card figcaption {
+      padding: 14px 16px 16px;
+      color: var(--text);
+      font-weight: 800;
     }
 
     .contact-section {
@@ -492,6 +547,10 @@
         grid-template-columns: 1fr;
       }
 
+      .screenshot-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
       .trust-strip {
         grid-template-columns: 1fr;
       }
@@ -536,6 +595,10 @@
         gap: 7px;
       }
 
+      .screenshot-grid {
+        grid-template-columns: 1fr;
+      }
+
       .contact-list li {
         align-items: flex-start;
         flex-direction: column;
@@ -561,6 +624,7 @@
       </a>
       <div class="nav-links">
         <a href="#features">Features</a>
+        <a href="#screenshots">Screenshots</a>
         <a href="#contact">Contact</a>
         <a href="#compliance">Compliance</a>
       </div>
@@ -595,25 +659,8 @@
         </div>
       </div>
 
-      <div class="game-panel" aria-label="Abstract neon puzzle board preview">
-        <div class="tetra-stack" aria-hidden="true">
-          <span class="tile empty"></span>
-          <span class="tile pink"></span>
-          <span class="tile pink"></span>
-          <span class="tile empty"></span>
-          <span class="tile"></span>
-          <span class="tile pink"></span>
-          <span class="tile"></span>
-          <span class="tile empty"></span>
-          <span class="tile"></span>
-          <span class="tile"></span>
-          <span class="tile pink"></span>
-          <span class="tile pink"></span>
-          <span class="tile empty"></span>
-          <span class="tile"></span>
-          <span class="tile"></span>
-          <span class="tile pink"></span>
-        </div>
+      <div class="game-panel media-frame" aria-label="TetraVerse game home screen screenshot">
+        <img class="hero-screenshot" src="menu.jpeg" alt="TetraVerse home screen with wallet connect, start universe, market, and rank buttons">
       </div>
     </section>
 
@@ -647,6 +694,35 @@
       </div>
     </section>
 
+    <section class="section" id="screenshots" aria-labelledby="screenshots-title">
+      <div class="section-heading">
+        <p class="eyebrow">Official Game Media</p>
+        <h2 id="screenshots-title">Real TetraVerse gameplay screens.</h2>
+        <p>
+          Screenshots from the Android game show wallet access, neon puzzle gameplay, premium skin market, and global ranking.
+        </p>
+      </div>
+
+      <div class="screenshot-grid">
+        <figure class="screenshot-card">
+          <img src="menu.jpeg" alt="TetraVerse main menu with Solana wallet connect and game navigation">
+          <figcaption>Main Menu</figcaption>
+        </figure>
+        <figure class="screenshot-card">
+          <img src="game.jpeg" alt="TetraVerse neon puzzle gameplay board with active block and touch controls">
+          <figcaption>Gameplay</figcaption>
+        </figure>
+        <figure class="screenshot-card">
+          <img src="market.jpeg" alt="TetraVerse Neon Market showing premium skins priced in SOL">
+          <figcaption>Neon Market</figcaption>
+        </figure>
+        <figure class="screenshot-card">
+          <img src="Global_ranking.jpeg" alt="TetraVerse global ranking leaderboard screen">
+          <figcaption>Global Ranking</figcaption>
+        </figure>
+      </div>
+    </section>
+
     <section class="section compliance-section" id="compliance" aria-labelledby="compliance-title">
       <div class="section-heading">
         <p class="eyebrow">Compliance</p>
@@ -677,6 +753,13 @@
             Contact the developer for help, purchase questions, and data requests.
           </span>
           <span>Email</span>
+        </a>
+        <a class="compliance-card" href="https://tetraverse.vercel.app/.well-known/assetlinks.json">
+          <span>
+            <strong>Digital Asset Links</strong>
+            Android domain verification file for the TetraVerse package.
+          </span>
+          <span>Verify</span>
         </a>
       </div>
     </section>
