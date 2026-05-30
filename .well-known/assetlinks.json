@@ -3,6 +3,6 @@
   "target": {
     "namespace": "android_app",
     "package_name": "com.tetraverse.app",
-    "sha256_cert_fingerprints": ["6A:05:40:9D:69:B3:01:46:16:D4:C9:28:C8:D2:7C:1E:C4:42:35:E1:1F:B1:97:54:3B:58:63:F1:C9:A0:6C:54"]
+    "sha256_cert_fingerprints": ["AA:24:B9:8B:1C:60:DC:EE:AF:9D:BE:3C:E8:09:87:43:8E:D0:9C:6F:02:8A:30:49:15:E0:1A:18:AB:47:82:64"]
   }
 }]
