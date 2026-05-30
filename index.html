@@ -571,6 +571,20 @@
       margin-bottom: 32px;
     }
 
+    .footer-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text);
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .footer-brand img {
+      border-radius: 8px;
+      box-shadow: 0 0 18px rgba(255, 0, 204, 0.18);
+    }
+
     .footer-action {
       display: inline-flex;
       min-height: 40px;
@@ -921,6 +935,11 @@
         <a class="footer-action" href="mailto:nicolasjuanlynapitupulu@gmail.com">Contact Developer</a>
       </div>
       <div class="footer-links" aria-label="Compliance links">
+        <a class="footer-brand" href="/">
+          <img src="icon.png" alt="TetraVerse logo" width="24" height="24">
+          TetraVerse
+        </a>
+        <span class="footer-divider">|</span>
         <a href="/privacy">Privacy</a>
         <span class="footer-divider">|</span>
         <a href="/terms">Terms</a>
