@@ -40,6 +40,19 @@
       color: #ff00cc;
     }
 
+    .page-brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    .page-brand img {
+      border-radius: 10px;
+      box-shadow: 0 0 18px rgba(255, 0, 204, 0.25);
+    }
+
     .updated {
       color: #aab5ca;
     }
@@ -55,7 +68,10 @@
 <body>
   <main>
     <nav aria-label="Policy navigation">
-      <a href="https://tetraverse.vercel.app/">Home</a>
+      <a class="page-brand" href="https://tetraverse.vercel.app/">
+        <img src="icon.png" alt="TetraVerse logo" width="28" height="28">
+        TetraVerse
+      </a>
       <a href="https://tetraverse.vercel.app/terms">Terms of Use</a>
       <a href="mailto:nicolasjuanlynapitupulu@gmail.com">Support</a>
     </nav>
