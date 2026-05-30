@@ -22,6 +22,10 @@
       "destination": "/terms.html"
     },
     {
+      "source": "/eula",
+      "destination": "/eula.html"
+    },
+    {
       "source": "/privacy-policy",
       "destination": "/privacy.html"
     },
